@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class,'index']);
-Route::post('/search', [UserController::class,'index']);
-Route::get('/login', [UserController::class,'loginForm']);
-Route::post('/checkuser', [UserController::class,'checkUser']);
+Route::middleware('CheckUser')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::post('/search', [UserController::class, 'index']);
+    Route::get('/game', [GameController::class, 'index']);
+    Route::post('/game-search', [GameController::class, 'index']);
+    Route::get('/game/create', [GameController::class, 'create']);
 
+});
 
-
-
+Route::get('/login', [UserController::class, 'loginForm']);
+Route::get('/logout', [UserController::class, 'logout']);
+Route::post('/checkuser', [UserController::class, 'checkUser']);

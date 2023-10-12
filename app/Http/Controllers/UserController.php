@@ -34,6 +34,15 @@ class UserController extends Controller
         return view('login');
     }
 
+    //Logout
+    public function logout()
+    {
+        session()->forget('user');
+        return view('login');
+    }
+
+
+
     public function checkUser(Request $request)
     {
         $user = User::where('username', $request->username)
@@ -41,7 +50,7 @@ class UserController extends Controller
             ->first();
 
         if ($user) {
-            session()->push('user', $user);
+            session()->put('user', $user);
             return redirect('/')->withErrors(['message' => 'เข้าสู่ระบบแล้วจ้า']);
         } else {
             return redirect('/login')->withErrors(['message' => 'username และ password บ่ถืกต้อง']);

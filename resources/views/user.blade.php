@@ -2,18 +2,16 @@
 @section('title', 'User')
 @section('main')
     <div class="container  bg-white">
-
-        @error('message')
-            <div class="alert alert-success m-5">
-                {{ $message }}
-            </div>
-        @enderror
-
         <h1 class="mt-5 mb-3 text-danger">Show All User</h1>
 
         <div class="container card shadow">
 
             <div class="m-2 d-flex justify-content-end">
+                <form class="form d-flex" action="{{ url('/search') }}" method="post">
+                    @csrf
+                    <input type="text" class="form-control" name="keyword">
+                    <input type="submit" value="ค้นหา" class="btn btn-primary ms-2">
+                </form>
                 <form class="form d-flex" action="{{ url('/search') }}" method="post">
                     @csrf
                     <input type="text" class="form-control" name="keyword">
