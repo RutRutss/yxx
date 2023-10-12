@@ -51,9 +51,9 @@ class UserController extends Controller
 
         if ($user) {
             session()->put('user', $user);
-            return redirect('/')->withErrors(['message' => 'เข้าสู่ระบบแล้วจ้า']);
+            return redirect('/');
         } else {
-            return redirect('/login')->withErrors(['message' => 'username และ password บ่ถืกต้อง']);
+            return redirect('/login')->withErrors(['message' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง']);
         }
     }
 }
